@@ -130,10 +130,12 @@
     <ClInclude Include="dx11.h" />
     <ClInclude Include="dx11minimal.h" />
     <ClInclude Include="framework.h" />
-    <None Include="PS.h" />
+    <ClInclude Include="PS_sphere.h" />
+    <ClInclude Include="VS_sphere.h" />
+    <None Include="PS_plane.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
-    <None Include="VS.h" />
+    <None Include="VS_plane.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dx11minimal.cpp" />

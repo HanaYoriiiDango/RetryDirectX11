@@ -30,6 +30,12 @@
     <ClInclude Include="dx11.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="VS_sphere.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PS_sphere.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dx11minimal.cpp">
@@ -50,10 +56,10 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="PS.h">
+    <None Include="PS_plane.h">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="VS.h">
+    <None Include="VS_plane.h">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>

@@ -22,6 +22,13 @@ cbuffer drawMat : register(b2)
     float hilight;
 };
 
+cbuffer drawerV : register (b0)
+{
+    float4 drawConst[32];
+
+
+};
+
 struct VS_OUTPUT
 {
     float4 pos : SV_POSITION;
@@ -31,25 +38,44 @@ struct VS_OUTPUT
     float2 uv : TEXCOORD0;
 };
 
-float3 rotY(float3 pos, float a)
-{
-    float3x3 m =
-    {
-        cos(a), 0, sin(a),
-        0, 1, 0,
-        -sin(a), 0, cos(a)
-    };
-    pos = mul(pos, m);
+float3 Sphere(float2 p) {
+    float rad = 3;
+    float n = (float)drawConst[0];
+
+    p.x = (p.x / n) * 2.0 * 3.141592653589793;
+    p.y = (p.y / n) * 3.141592653589793;
+
+    float3 pos = float3(
+        rad * sin(p.y) * cos(p.x),
+        rad * cos(p.y) + 5.0,
+        rad * sin(p.y) * sin(p.x)
+    );
+
     return pos;
 }
 
 VS_OUTPUT VS(uint vID : SV_VertexID)
 {
     VS_OUTPUT output = (VS_OUTPUT)0;
+
+    uint n = drawConst[0];
+    uint instanceID = vID / 6;
+
+    float row = instanceID % n;
+    float col = instanceID / n;
+
     float2 quad[6] = { -1, -1, 1, -1, -1, 1, 1, -1, 1, 1, -1, 1 };
-    float2 p = quad[vID];
-    float4 pos = float4(quad[vID], 0, 1);
+    float2 p = quad[vID % 6];
+
+    float4 pos = float4(p, -2.0, 5);
+    pos.y += col * 2;
+    pos.x += row * 2;
+    pos.xy -= (float)n - 1;
+
+    pos.xyz = Sphere(pos);
+
     output.pos = mul(pos, mul(view[0], proj[0]));
     output.uv = float2(1, -1) * p / 2. + .5;
+
     return output;
 }

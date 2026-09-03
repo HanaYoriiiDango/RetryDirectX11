@@ -411,7 +411,7 @@ namespace Shaders {
 
 	void Log(const char* message)
 	{
-		OutputDebugString(message);
+		OutputDebugStringA(message);
 	}
 
 	void CompilerLog(LPCWSTR source, HRESULT hr, const char* message)
@@ -461,8 +461,12 @@ namespace Shaders {
 
 	void Init()
 	{
-		CreateVS(0, nameToPatchLPCWSTR("VS.h"));
-		CreatePS(0, nameToPatchLPCWSTR("PS.h"));
+		CreateVS(0, nameToPatchLPCWSTR("VS_plane.h"));
+		CreatePS(0, nameToPatchLPCWSTR("PS_plane.h"));
+
+		CreateVS(1, nameToPatchLPCWSTR("VS_sphere.h"));
+		CreatePS(1, nameToPatchLPCWSTR("PS_sphere.h"));
+
 	}
 
 	void vShader(unsigned int n)
@@ -918,7 +922,9 @@ namespace Camera
 		float t = timer::frameBeginTime*.001;
 		float angle = 100;
 		float a = 3.5;
-		XMVECTOR Eye = XMVectorSet(sin(t)*a, 0, cos(t)*a, 0.0f);
+
+		XMVECTOR Eye = XMVectorSet(10, 5, 10, 0.0f); // Fixed 
+		//XMVECTOR Eye = XMVectorSet(sin(t)*a, 0, cos(t)*a, 0.0f);
 		XMVECTOR At = XMVectorSet(0, 0, 0, 0.0f);
 		XMVECTOR Up = XMVectorSet(0, 1, 0, 0.0f);
 
@@ -937,20 +943,36 @@ void mainLoop()
 	frameConst();
 
 	InputAssembler::IA(InputAssembler::topology::triList);
-	Blend::Blending(Blend::blendmode::alpha, Blend::blendop::add);
+	Blend::Blending(Blend::blendmode::off, Blend::blendop::add);
 
 	Textures::RenderTarget(0, 0);
-	Draw::Clear({ 0,0,1,0 });
+	Draw::Clear({ 0.2f,0.3f,0.5f,1.0f });
 	Draw::ClearDepth();
 	Depth::Depth(Depth::depthmode::on);
 	Rasterizer::Cull(Rasterizer::cullmode::off);
-	Shaders::vShader(0);
-	Shaders::pShader(0);
 	ConstBuf::ConstToVertex(4);
 	ConstBuf::ConstToPixel(4);
-
 	Camera::Camera();
 
-	Draw::NullDrawer(1, 1);
+	ConstBuf::drawerMat.model = XMMatrixIdentity();
+	ConstBuf::UpdateDrawerMat();
+	ConstBuf::ConstToVertex(2);
+	
+	// plane
+	Shaders::vShader(0);
+	Shaders::pShader(0);
+	int np = 10;
+
+	ConstBuf::drawerV[0] = np;
+	Draw::NullDrawer(np * np, 1);
+
+
+	// sphere
+	Shaders::vShader(1);
+	Shaders::pShader(1);
+	int ns = 10;
+
+	ConstBuf::drawerV[0] = ns;
+	Draw::NullDrawer(ns * ns, 1);
 	Draw::Present();
 }
