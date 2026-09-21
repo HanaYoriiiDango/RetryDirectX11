@@ -27,6 +27,12 @@ cbuffer params : register(b1)
     float r, g, b;
 };
 
+cbuffer driverP : register(b1)
+{
+    float4 drawConst[32];
+
+};
+
 struct VS_OUTPUT
 {
     float4 pos : SV_POSITION;
@@ -38,5 +44,10 @@ struct VS_OUTPUT
 
 float4 PS(VS_OUTPUT input) : SV_Target
 {
-    return float4(4.0f, 0.0f, 0.0f, 55.0f); // white
+    float light_power = 0.2f;
+    float c = 0.1f;
+    
+
+ 
+    return float4(c, c, c, 1.); // white
 }

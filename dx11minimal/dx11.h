@@ -923,8 +923,8 @@ namespace Camera
 		float angle = 100;
 		float a = 3.5;
 
-		XMVECTOR Eye = XMVectorSet(10, 5, 10, 0.0f); // Fixed 
-		//XMVECTOR Eye = XMVectorSet(sin(t)*a, 0, cos(t)*a, 0.0f);
+		//XMVECTOR Eye = XMVectorSet(10, 5, 10, 0.0f); // Fixed 
+		XMVECTOR Eye = XMVectorSet(sin(t)*a, 0, cos(t)*a, 0.0f);
 		XMVECTOR At = XMVectorSet(0, 0, 0, 0.0f);
 		XMVECTOR Up = XMVectorSet(0, 1, 0, 0.0f);
 
@@ -966,13 +966,15 @@ void mainLoop()
 	ConstBuf::drawerV[0] = np;
 	Draw::NullDrawer(np * np, 1);
 
-
 	
 	// sphere
 	Shaders::vShader(1);
 	Shaders::pShader(1);
-	int ns = 10;
 
+	int ns = 10;
+	float light_power = 0.2f;
+
+	ConstBuf::drawerP[0] = light_power;
 	ConstBuf::drawerV[0] = ns;
 	Draw::NullDrawer(ns * ns, 1);
 	Draw::Present();
