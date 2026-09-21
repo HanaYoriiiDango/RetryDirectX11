@@ -946,7 +946,7 @@ void mainLoop()
 	Blend::Blending(Blend::blendmode::off, Blend::blendop::add);
 
 	Textures::RenderTarget(0, 0);
-	Draw::Clear({ 0.2f,0.3f,0.5f,1.0f });
+	Draw::Clear({ 0.1f,0.1f,0.1f,1.0f });
 	Draw::ClearDepth();
 	Depth::Depth(Depth::depthmode::on);
 	Rasterizer::Cull(Rasterizer::cullmode::off);
