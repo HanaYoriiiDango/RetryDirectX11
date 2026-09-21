@@ -941,7 +941,7 @@ namespace Camera
 void mainLoop()
 {
 	frameConst();
-
+	 
 	InputAssembler::IA(InputAssembler::topology::triList);
 	Blend::Blending(Blend::blendmode::off, Blend::blendop::add);
 
