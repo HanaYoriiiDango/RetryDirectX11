@@ -967,6 +967,7 @@ void mainLoop()
 	Draw::NullDrawer(np * np, 1);
 
 
+	
 	// sphere
 	Shaders::vShader(1);
 	Shaders::pShader(1);
