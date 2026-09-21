@@ -45,9 +45,10 @@ struct VS_OUTPUT
 float4 PS(VS_OUTPUT input) : SV_Target
 {
     float light_power = 0.2f;
-    float c = 0.1f;
-    
+    float one = 0.1f;
 
+    input.
+    input.uv = ;
  
-    return float4(c, c, c, 1.); // white
+    return float4(one * light_power, one * light_power, one * light_power, 1.); // white
 }
