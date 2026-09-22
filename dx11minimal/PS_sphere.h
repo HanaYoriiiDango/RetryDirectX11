@@ -44,10 +44,15 @@ struct VS_OUTPUT
 
 float4 PS(VS_OUTPUT input) : SV_Target
 {
-    float light_power = 0.2f;
-    float light_color = 0.3f;
+    float ambientStrength = 0.6f;
     
+    float3 lightColor = float3(1.0f, 1.0f, 1.0f);
+
+    float3 ObjectColor = float3(0.1f, 0.1f, 0.1f);
+
+    float3 ambient = ambientStrength * lightColor;
+    float3 result = ambient * ObjectColor;
     
 
-    return float4(light_color * light_power, light_color * light_power, light_color * light_power, 1.); // white
+    return float4(result, 1.); // white
 }
