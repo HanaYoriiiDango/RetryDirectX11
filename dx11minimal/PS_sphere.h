@@ -27,12 +27,6 @@ cbuffer params : register(b1)
     float r, g, b;
 };
 
-cbuffer driverP : register(b1)
-{
-    float4 drawConst[32];
-
-};
-
 struct VS_OUTPUT
 {
     float4 pos : SV_POSITION;
@@ -40,18 +34,31 @@ struct VS_OUTPUT
     float4 wpos : POSITION1;
     float4 vnorm : NORMAL1;
     float2 uv : TEXCOORD0;
+
+    float4 textureColor;
+    float3 lightDir;
+    float lightIntensity;
+    float4 color;
+            
 };
 
 float4 PS(VS_OUTPUT input) : SV_Target
 {
     float ambientStrength = 0.6f;
+
+    float3 nv = normalize(input.vnorm.xyz);
     
-    float3 lightColor = float3(1.0f, 1.0f, 1.0f);
+    float3 lightColor = float3(5.0f, 5.0f, 5.0f);
+
+    float3 lv = normalize(float3(0, -1, 0));
+
+    float diff = max(dot(nv,lv), 0.0f);
+    float3 diffuse = diff * lightColor;
 
     float3 ObjectColor = float3(0.1f, 0.1f, 0.1f);
 
     float3 ambient = ambientStrength * lightColor;
-    float3 result = ambient * ObjectColor;
+    float3 result = (ambient + diffuse) * ObjectColor;
     
 
     return float4(result, 1.); // white

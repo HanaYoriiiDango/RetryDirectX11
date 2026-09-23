@@ -57,6 +57,9 @@ VS_OUTPUT VS(uint vID : SV_VertexID)
     pos.x -= (float)n - 1;
     pos.z -= (float)n - 1;
 
+    output.vpos = pos;
+    output.vnorm = float4(0.0f, 0.1f, 0.0f, 0.0f);
+
     output.pos = mul(pos, mul(view[0], proj[0]));
     output.uv = float2(1, -1) * p / 2. + .5;
 

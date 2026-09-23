@@ -971,10 +971,8 @@ void mainLoop()
 	Shaders::vShader(1);
 	Shaders::pShader(1);
 
-	int ns = 10;
-	float light_power = 0.2f;
+	int ns = 32;
 
-	ConstBuf::drawerP[0] = light_power;
 	ConstBuf::drawerV[0] = ns;
 	Draw::NullDrawer(ns * ns, 1);
 	Draw::Present();

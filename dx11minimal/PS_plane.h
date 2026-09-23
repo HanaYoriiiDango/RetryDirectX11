@@ -38,6 +38,22 @@ struct VS_OUTPUT
 
 float4 PS(VS_OUTPUT input) : SV_Target
 {
+     float ambientStrength = 0.6f;
 
-    return float4(0.9f, 0.9f, 0.9f, 0.0f); // white
+    float3 nv = normalize(input.vnorm.xyz);
+
+    float3 lightColor = float3(5.0f, 5.0f, 5.0f);
+
+    float3 lv = normalize(lightColor - input.wpos.xyz);
+
+    float diff = max(dot(nv,lv), 0.0f);
+    float3 diffuse = diff * lightColor;
+
+    float3 ObjectColor = float3(0.1f, 0.1f, 0.1f);
+
+    float3 ambient = ambientStrength * lightColor;
+    float3 result = (ambient + diffuse) * ObjectColor;
+
+
+    return float4(result, 1.); 
 }
