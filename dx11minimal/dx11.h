@@ -929,8 +929,8 @@ namespace Camera
 		XMVECTOR Up = XMVectorSet(0, 1, 0, 0.0f);
 
 		ConstBuf::camera.world[0] = XMMatrixIdentity();
-		ConstBuf::camera.view[0] = XMMatrixTranspose(XMMatrixLookAtLH(Eye, At, Up));
-		ConstBuf::camera.proj[0] = XMMatrixTranspose(XMMatrixPerspectiveFovLH(DegreesToRadians(angle), iaspect, 0.01f, 100.0f));
+		//ConstBuf::camera.view[0] = XMMatrixTranspose(XMMatrixLookAtLH(Eye, At, Up));
+		//ConstBuf::camera.proj[0] = XMMatrixTranspose(XMMatrixPerspectiveFovLH(DegreesToRadians(angle), iaspect, 0.01f, 100.0f));
 
 		ConstBuf::UpdateCamera();
 		ConstBuf::ConstToVertex(3);
@@ -954,13 +954,14 @@ void mainLoop()
 	ConstBuf::ConstToPixel(4);
 	Camera::Camera();
 
-	ConstBuf::drawerMat.model = XMMatrixIdentity();
-	ConstBuf::UpdateDrawerMat();
 	ConstBuf::ConstToVertex(2);
 	
 	// plane
+	ConstBuf::drawerMat.model = XMMatrixIdentity();
+	ConstBuf::UpdateDrawerMat();
 	Shaders::vShader(0);
 	Shaders::pShader(0);
+
 	int np = 10;
 
 	ConstBuf::drawerV[0] = np;
@@ -968,6 +969,8 @@ void mainLoop()
 
 	
 	// sphere
+	ConstBuf::drawerMat.model = XMMatrixIdentity();
+	ConstBuf::UpdateDrawerMat();
 	Shaders::vShader(1);
 	Shaders::pShader(1);
 

@@ -45,13 +45,11 @@ float3 Sphere(float2 p) {
     p.x = (p.x / n) * 2.0 * 3.141592653589793;
     p.y = (p.y / n) * 3.141592653589793;
 
-    float3 pos = float3(
+    return float3(
         rad * sin(p.y) * cos(p.x),
-        rad * cos(p.y) + 5.0,
+        rad * cos(p.y),          
         rad * sin(p.y) * sin(p.x)
     );
-
-    return pos;
 }
 
 VS_OUTPUT VS(uint vID : SV_VertexID)
@@ -60,24 +58,21 @@ VS_OUTPUT VS(uint vID : SV_VertexID)
 
     uint n = drawConst[0];
     uint instanceID = vID / 6;
-
     float row = instanceID % n;
     float col = instanceID / n;
 
     float2 quad[6] = { -1, -1, 1, -1, -1, 1, 1, -1, 1, 1, -1, 1 };
     float2 p = quad[vID % 6];
 
-    float4 pos = float4(p, -2.0, 5);
-    pos.y += col * 2;
-    pos.x += row * 2;
-    pos.xy -= (float)n - 1;
+    float2 uv = (p / 2.0 + 0.5);
 
-    pos.xyz = Sphere(pos);
+    float3 pos = Sphere(float2(row + uv.x, col + uv.y));
 
-    output.vpos = pos;
-    output.vnorm = float4(normalize(pos.xyz), 0.0f);
-
-    output.pos = mul(pos, mul(view[0], proj[0]));
+    output.vpos = float4(pos, 1);
+    output.wpos = mul(float4(pos, 1), drawMat.model);
+    output.vnorm = float4(normalize(pos), 0);
+    output.pos = mul(output.wpos, mul(view[0], proj[0]));
+   
     output.uv = float2(1, -1) * p / 2. + .5;
 
     return output;
