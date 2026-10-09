@@ -58,21 +58,16 @@ VS_OUTPUT VS(uint vID : SV_VertexID)
 
     uint n = drawConst[0];
     uint instanceID = vID / 6;
+
     float row = instanceID % n;
     float col = instanceID / n;
 
     float2 quad[6] = { -1, -1, 1, -1, -1, 1, 1, -1, 1, 1, -1, 1 };
     float2 p = quad[vID % 6];
 
-    float2 uv = (p / 2.0 + 0.5);
+    float4 pos = float4(Sphere(p), 0, 0);
 
-    float3 pos = Sphere(float2(row + uv.x, col + uv.y));
-
-    output.vpos = float4(pos, 1);
-    output.wpos = mul(float4(pos, 1), drawMat.model);
-    output.vnorm = float4(normalize(pos), 0);
-    output.pos = mul(output.wpos, mul(view[0], proj[0]));
-   
+    output.pos = mul(pos, mul(view[0],proj[0]));
     output.uv = float2(1, -1) * p / 2. + .5;
 
     return output;

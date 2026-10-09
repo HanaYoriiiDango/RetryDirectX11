@@ -919,9 +919,9 @@ namespace Camera
 
 	void Camera()
 	{
-		float t = timer::frameBeginTime*.001;
-		float angle = 100;
-		float a = 3.5;
+		float t = timer::frameBeginTime*0.1;
+		float angle = 90;
+		float a = 5.5;
 
 		//XMVECTOR Eye = XMVectorSet(10, 5, 10, 0.0f); // Fixed 
 		XMVECTOR Eye = XMVectorSet(sin(t)*a, 0, cos(t)*a, 0.0f);
@@ -929,8 +929,8 @@ namespace Camera
 		XMVECTOR Up = XMVectorSet(0, 1, 0, 0.0f);
 
 		ConstBuf::camera.world[0] = XMMatrixIdentity();
-		//ConstBuf::camera.view[0] = XMMatrixTranspose(XMMatrixLookAtLH(Eye, At, Up));
-		//ConstBuf::camera.proj[0] = XMMatrixTranspose(XMMatrixPerspectiveFovLH(DegreesToRadians(angle), iaspect, 0.01f, 100.0f));
+		ConstBuf::camera.view[0] = XMMatrixTranspose(XMMatrixLookAtLH(Eye, At, Up));
+		ConstBuf::camera.proj[0] = XMMatrixTranspose(XMMatrixPerspectiveFovLH(DegreesToRadians(angle), iaspect, 0.01f, 100.0f));
 
 		ConstBuf::UpdateCamera();
 		ConstBuf::ConstToVertex(3);
@@ -949,7 +949,7 @@ void mainLoop()
 	Draw::Clear({ 0.1f,0.1f,0.1f,1.0f });
 	Draw::ClearDepth();
 	Depth::Depth(Depth::depthmode::on);
-	Rasterizer::Cull(Rasterizer::cullmode::off);
+	Rasterizer::Cull(Rasterizer::cullmode::wireframe);
 	ConstBuf::ConstToVertex(4);
 	ConstBuf::ConstToPixel(4);
 	Camera::Camera();
@@ -957,6 +957,7 @@ void mainLoop()
 	ConstBuf::ConstToVertex(2);
 	
 	// plane
+	//ConstBuf::drawerMat.model = XMMatrixTranslation(0.0f, 5.0f, 0.0f);
 	ConstBuf::drawerMat.model = XMMatrixIdentity();
 	ConstBuf::UpdateDrawerMat();
 	Shaders::vShader(0);
@@ -969,6 +970,7 @@ void mainLoop()
 
 	
 	// sphere
+	//ConstBuf::drawerMat.model = XMMatrixTranslation(0.0f, 5.0f, 0.0f);
 	ConstBuf::drawerMat.model = XMMatrixIdentity();
 	ConstBuf::UpdateDrawerMat();
 	Shaders::vShader(1);

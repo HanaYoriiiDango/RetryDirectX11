@@ -44,21 +44,21 @@ struct VS_OUTPUT
 
 float4 PS(VS_OUTPUT input) : SV_Target
 {
-    // input
-    float ambientStrength = 0.6f;
-    float3 lightColor = float3(1.0f, 1.0f, 1.0f);
-    float3 ObjectColor = float3(0.1f, 0.1f, 0.1f);
+    //// input
+    //float ambientStrength = 0.6f;
+    //float3 lightColor = float3(1.0f, 1.0f, 1.0f);
+    //float3 ObjectColor = float3(0.1f, 0.1f, 0.1f);
 
-    // ambient
-    float3 ambient = ambientStrength * lightColor;
+    //// ambient
+    //float3 ambient = ambientStrength * lightColor;
 
-    // diffuse
-    float3 nv = normalize(input.vnorm.xyz);
-    float3 lv = normalize(float3(0.0f, -1.0f, 0.0f)); // Свет СВЕРХУ ВНИЗ
-    float diff = saturate(dot(nv, lv));          // косинус угла
+    //// diffuse
+    //float3 nv = normalize(input.vnorm.xyz);
+    //float3 lv = normalize(float3(0.0f, -1.0f, 0.0f)); // Свет СВЕРХУ ВНИЗ
+    //float diff = saturate(dot(nv, lv));          // косинус угла
 
-    // result
-    float3 result = (ambient + diff * lightColor) * ObjectColor;
+    //// result
+    //float3 result = (ambient + diff * lightColor) * ObjectColor;
 
-    return float4(result, 1.0f);
+    return float4(1.0f, 1.0f, 1.0f, 1.0f);
 }
