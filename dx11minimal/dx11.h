@@ -919,9 +919,9 @@ namespace Camera
 
 	void Camera()
 	{
-		float t = timer::frameBeginTime*0.1;
+		float t = timer::frameBeginTime*0.0001;
 		float angle = 90;
-		float a = 5.5;
+		float a = 3.5;
 
 		//XMVECTOR Eye = XMVectorSet(10, 5, 10, 0.0f); // Fixed 
 		XMVECTOR Eye = XMVectorSet(sin(t)*a, 0, cos(t)*a, 0.0f);
@@ -967,7 +967,6 @@ void mainLoop()
 
 	ConstBuf::drawerV[0] = np;
 	Draw::NullDrawer(np * np, 1);
-
 	
 	// sphere
 	//ConstBuf::drawerMat.model = XMMatrixTranslation(0.0f, 5.0f, 0.0f);

@@ -51,7 +51,7 @@ VS_OUTPUT VS(uint vID : SV_VertexID)
     float2 quad[6] = { -1, -1, 1, -1, -1, 1, 1, -1, 1, 1, -1, 1 };
     float2 p = quad[vID % 6];
 
-    float4 pos = float4(p.x, -2.0, p.y, 3.0);
+    float4 pos = float4(p.x, -2.0, p.y, 4.0);
     pos.x += row * 2;
     pos.z += col * 2;
     pos.x -= (float)n - 1;

@@ -39,6 +39,7 @@ struct VS_OUTPUT
 };
 
 float3 Sphere(float2 p) {
+
     float rad = 3;
     float n = (float)drawConst[0];
 
@@ -65,8 +66,15 @@ VS_OUTPUT VS(uint vID : SV_VertexID)
     float2 quad[6] = { -1, -1, 1, -1, -1, 1, 1, -1, 1, 1, -1, 1 };
     float2 p = quad[vID % 6];
 
-    float4 pos = float4(Sphere(p), 0, 0);
+    float4 pos = float4(p, -2.0, 2);
+    pos.x += row * 2;
+    pos.y += col * 2;
+    pos.xy -= (float)n - 1;
 
+    pos.xyz = Sphere(pos);
+
+    //output.vpos = pos;
+    //output.vnorm = float4(normalize(pos.xyz - float3(0.0f, 5.0f, 0.0f)), 0.0f)
     output.pos = mul(pos, mul(view[0],proj[0]));
     output.uv = float2(1, -1) * p / 2. + .5;
 
