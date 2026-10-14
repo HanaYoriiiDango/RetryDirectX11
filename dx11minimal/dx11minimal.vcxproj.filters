@@ -30,10 +30,10 @@
     <ClInclude Include="dx11.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="VS_sphere.h">
+    <ClInclude Include="VS_pl.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="PS_sphere.h">
+    <ClInclude Include="PS_pl.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

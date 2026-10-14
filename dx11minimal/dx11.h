@@ -464,8 +464,8 @@ namespace Shaders {
 		CreateVS(0, nameToPatchLPCWSTR("VS_plane.h"));
 		CreatePS(0, nameToPatchLPCWSTR("PS_plane.h"));
 
-		CreateVS(1, nameToPatchLPCWSTR("VS_sphere.h"));
-		CreatePS(1, nameToPatchLPCWSTR("PS_sphere.h"));
+		CreateVS(1, nameToPatchLPCWSTR("VS_pl.h"));
+		CreatePS(1, nameToPatchLPCWSTR("PS_pl.h"));
 
 	}
 
@@ -949,7 +949,7 @@ void mainLoop()
 	Draw::Clear({ 0.1f,0.1f,0.1f,1.0f });
 	Draw::ClearDepth();
 	Depth::Depth(Depth::depthmode::on);
-	Rasterizer::Cull(Rasterizer::cullmode::wireframe);
+	Rasterizer::Cull(Rasterizer::cullmode::off);
 	ConstBuf::ConstToVertex(4);
 	ConstBuf::ConstToPixel(4);
 	Camera::Camera();
@@ -957,7 +957,6 @@ void mainLoop()
 	ConstBuf::ConstToVertex(2);
 	
 	// plane
-	//ConstBuf::drawerMat.model = XMMatrixTranslation(0.0f, 5.0f, 0.0f);
 	ConstBuf::drawerMat.model = XMMatrixIdentity();
 	ConstBuf::UpdateDrawerMat();
 	Shaders::vShader(0);
@@ -969,13 +968,12 @@ void mainLoop()
 	Draw::NullDrawer(np * np, 1);
 	
 	// sphere
-	//ConstBuf::drawerMat.model = XMMatrixTranslation(0.0f, 5.0f, 0.0f);
 	ConstBuf::drawerMat.model = XMMatrixIdentity();
 	ConstBuf::UpdateDrawerMat();
 	Shaders::vShader(1);
 	Shaders::pShader(1);
 
-	int ns = 32;
+	int ns = 16;
 
 	ConstBuf::drawerV[0] = ns;
 	Draw::NullDrawer(ns * ns, 1);
