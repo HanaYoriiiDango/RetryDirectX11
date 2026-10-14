@@ -46,6 +46,7 @@ float3 Sphere(float2 p) {
     p.x = (p.x / n) * 2.0 * 3.141592653589793;
     p.y = (p.y / n) * 3.141592653589793;
 
+
     float3 sos = float3(
         rad * sin(p.y) * cos(p.x),
         rad * cos(p.y),
