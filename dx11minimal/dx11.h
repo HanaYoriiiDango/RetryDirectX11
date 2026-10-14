@@ -973,7 +973,7 @@ void mainLoop()
 	Shaders::vShader(1);
 	Shaders::pShader(1);
 
-	int ns = 8;
+	int ns = 32;
 
 	ConstBuf::drawerV[0] = ns;
 	Draw::NullDrawer(ns * ns, 1);

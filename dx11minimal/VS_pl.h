@@ -43,9 +43,11 @@ float3 Sphere(float2 p) {
     float rad = 3;
     float n = (float)drawConst[0];
 
-    p.x = (p.x / n) * 2.0 * 3.141592653589793;
+    p.x = (p.x / n) * 2 * 3.141592653589793;
     p.y = (p.y / n) * 3.141592653589793;
 
+    p.x /= 4;
+    //p.y /= 2;
 
     float3 sos = float3(
         rad * sin(p.y) * cos(p.x),
@@ -70,7 +72,7 @@ VS_OUTPUT VS(uint vID : SV_VertexID)
     float2 quad[6] = { -1, -1, 1, -1, -1, 1, 1, -1, 1, 1, -1, 1 };
     float2 p = quad[vID % 6];
 
-    float4 pos = float4(p, -2, 5);
+    float4 pos = float4(p, -2, 2);
     pos.y += col * 2;
     pos.x += row * 2;
     pos.xy -= (float)n - 1;
