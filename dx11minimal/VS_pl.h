@@ -38,6 +38,7 @@ struct VS_OUTPUT
     float2 uv : TEXCOORD0;
 };
 
+
 float3 Sphere(float2 p) {
 
     float rad = 3;
@@ -46,7 +47,7 @@ float3 Sphere(float2 p) {
     p.x = (p.x / n) * 2 * 3.141592653589793;
     p.y = (p.y / n) * 3.141592653589793;
 
-    p.x /= 4;
+    //p.x /= 2;
     //p.y /= 2;
 
     float3 sos = float3(
@@ -77,7 +78,7 @@ VS_OUTPUT VS(uint vID : SV_VertexID)
     pos.x += row * 2;
     pos.xy -= (float)n - 1;
 
-    pos.xyz = Sphere(pos);
+    pos.xyz = Sphere(pos.xy);
 
     output.pos = mul(pos, mul(view[0], proj[0]));
     output.uv = float2(1, -1) * p / 2. + .5;
