@@ -43,13 +43,34 @@ float3 Sphere(float2 p) {
     float rad = 3;
     float n = (float)drawConst[0];
 
-    p.x = (p.x / n) * 2.0 * 3.141592653589793;
+    p.x = (p.x / n) * 2 * 3.141592653589793;
     p.y = (p.y / n) * 3.141592653589793;
 
     return float3(
         rad * sin(p.y) * cos(p.x),
         rad * cos(p.y),          
         rad * sin(p.y) * sin(p.x)
+    );
+}
+
+float3 Sphere222(float3 p) {
+
+    float rad = 3;
+    float n = (float)drawConst[0];
+
+    //for (int i = 0; i < 2; i++) {
+
+
+
+    //}
+
+    //p.x = (p.x / n) * 2 * 3.141592653589793;
+    //p.y = (p.y / n) * 3.141592653589793;
+
+    return float3(
+        p.x + rad * sin(p.y) * cos(p.x),
+        p.y + rad * sin(p.x) * sin(p.x),
+        p.z + rad * cos(p.y)
     );
 }
 
@@ -67,11 +88,11 @@ VS_OUTPUT VS(uint vID : SV_VertexID)
     float2 p = quad[vID % 6];
 
     float4 pos = float4(p, -2.0, 2);
-    pos.x += row * 2;
-    pos.y += col * 2;
-    pos.xy -= (float)n - 1;
+    //pos.x += row * 2;
+    //pos.y += col * 2;
+    //pos.xy -= (float)n - 1;
 
-    pos.xyz = Sphere(pos);
+    //pos.xyz = Sphere222(pos);
 
     //output.vpos = pos;
     //output.vnorm = float4(normalize(pos.xyz - float3(0.0f, 5.0f, 0.0f)), 0.0f)

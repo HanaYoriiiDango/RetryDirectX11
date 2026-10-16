@@ -46,5 +46,9 @@ float4 PS(VS_OUTPUT input) : SV_Target
     // ambient
     float3 ambient = ambientStrength * lightColor;
 
-    return float4(ambient, 1.0f);
+    float3 diffuse = max(dot(norm, lightDir));
+
+    float4 result = diffuse * ambient;
+
+    return float4(result, 1.0f);
 }
