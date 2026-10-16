@@ -48,14 +48,15 @@ float4 PS(VS_OUTPUT input) : SV_Target
     float3 lightColor = float3(1.0f, 1.0f, 1.0f);
     float3 ObjectColor = float3(0.1f, 0.1f, 0.1f);
 
-    float3 norm = normalize(input.pos);
-    float3 lightDir = normalize(input.pos - lightPos);
+    float3 norm = input.pos;
+    float3 lightDir = input.pos - lightPos;
 
     // ambient
     float3 ambient = ambientStrength * lightColor;
 
     // diffuse
-    float3 diffuse = max(dot(, lightDir), 0.0);
+    float diff = max(dot(norm, lightDir), 0.0);
+    float3 diffuse = diff * lightColor;
 
     // result
     float4 result = (ambient + diffuse) * ObjectColor;
