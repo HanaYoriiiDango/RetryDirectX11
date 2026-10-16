@@ -39,17 +39,15 @@ struct VS_OUTPUT
 float4 PS(VS_OUTPUT input) : SV_Target
 {   
 
-    //VS_OUTPUT input = (VS_OUTPUT)0;
-
     // input
     float ambientStrength = 0.6f;
-    float3 lightPos = float3(10.0f, 10.0f, 10.0f);
+    float3 lightPos = float3(4.0f, 5.0f, 2.0f);
 
     float3 lightColor = float3(1.0f, 1.0f, 1.0f);
     float3 ObjectColor = float3(0.1f, 0.1f, 0.1f);
 
-    float3 norm = input.pos;
-    float3 lightDir = input.pos - lightPos;
+    float3 norm = normalize(input.vnorm);
+    float3 lightDir = normalize(input.wpos - input.vpos);
 
     // ambient
     float3 ambient = ambientStrength * lightColor;
@@ -62,5 +60,5 @@ float4 PS(VS_OUTPUT input) : SV_Target
     float4 result = (ambient + diffuse) * ObjectColor;
     //float4 result = ambient;
 
-    return float4(ambient, 1.0f);
+    return float4(result, 1.0f);
 }
