@@ -57,8 +57,8 @@ float4 PS(VS_OUTPUT input) : SV_Target
     float3 diffuse = diff * lightColor;
 
     // result
-    float4 result = (ambient + diffuse) * ObjectColor;
-    //float4 result = ambient;
+    float3 result = (ambient + diffuse) * ObjectColor;
+    //float3 result = ambient;
 
     return float4(result, 1.0f);
 }

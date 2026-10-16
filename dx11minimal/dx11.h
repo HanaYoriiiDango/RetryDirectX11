@@ -464,8 +464,8 @@ namespace Shaders {
 		CreateVS(0, nameToPatchLPCWSTR("VS_plane.h"));
 		CreatePS(0, nameToPatchLPCWSTR("PS_plane.h"));
 
-		CreateVS(1, nameToPatchLPCWSTR("VS_pl.h"));
-		CreatePS(1, nameToPatchLPCWSTR("PS_pl.h"));
+		CreateVS(1, nameToPatchLPCWSTR("VS_pl.hlsl"));
+		CreatePS(1, nameToPatchLPCWSTR("PS_pl.hlsl"));
 
 	}
 
