@@ -79,9 +79,11 @@ VS_OUTPUT VS(uint vID : SV_VertexID)
     pos.xy -= (float)n - 1;
 
     pos.xyz = Sphere(pos);
-	output.vnorm = normalize(pos);
-
-    output.pos = mul(pos, mul(view[0], proj[0]));
+    
+    float4 worldPos = float4(pos.xyz, 2.0); // world identity
+    output.wpos = worldPos;
+    output.pos = mul(worldPos, mul(view[0], proj[0]));
+    output.vnorm = float4(normalize(pos.xyz), 0.0);
     output.uv = float2(1, -1) * p / 2. + .5;
 
     return output;

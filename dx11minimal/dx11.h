@@ -571,7 +571,9 @@ namespace ConstBuf
 		XMMATRIX world[2];
 		XMMATRIX view[2];
 		XMMATRIX proj[2];
-	} camera;//update per camera set
+		XMFLOAT3 eyePos;
+		float    _pad;   
+	} camera;
 
 	//b4
 	struct {
@@ -931,6 +933,8 @@ namespace Camera
 		ConstBuf::camera.world[0] = XMMatrixIdentity();
 		ConstBuf::camera.view[0] = XMMatrixTranspose(XMMatrixLookAtLH(Eye, At, Up));
 		ConstBuf::camera.proj[0] = XMMatrixTranspose(XMMatrixPerspectiveFovLH(DegreesToRadians(angle), iaspect, 0.01f, 100.0f));
+
+		XMStoreFloat3(&ConstBuf::camera.eyePos, Eye);
 
 		ConstBuf::UpdateCamera();
 		ConstBuf::ConstToVertex(3);

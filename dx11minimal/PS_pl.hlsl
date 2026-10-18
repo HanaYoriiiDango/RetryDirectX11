@@ -14,6 +14,8 @@ cbuffer camera : register(b3)
     float4x4 world[2];
     float4x4 view[2];
     float4x4 proj[2];
+    float3 eyePos;
+    float _pad;
 };
 
 cbuffer drawMat : register(b2)
@@ -40,14 +42,14 @@ float4 PS(VS_OUTPUT input) : SV_Target
 {   
 
     // input
-    float ambientStrength = 0.6f;
+    float ambientStrength = 0.2f;
     float3 lightPos = float3(4.0f, 5.0f, 2.0f);
 
     float3 lightColor = float3(1.0f, 1.0f, 1.0f);
-    float3 ObjectColor = float3(0.1f, 0.1f, 0.1f);
+    float3 ObjectColor = float3(0.7f, 0.4f, 0.2f);
 
     float3 norm = normalize(input.vnorm);
-    float3 lightDir = normalize(input.wpos - input.vpos);
+    float3 lightDir = normalize(lightPos - input.wpos.xyz);
 
     // ambient
     float3 ambient = ambientStrength * lightColor;
@@ -55,9 +57,15 @@ float4 PS(VS_OUTPUT input) : SV_Target
     // diffuse
     float diff = max(dot(norm, lightDir), 0.0);
     float3 diffuse = diff * lightColor;
-
+    
+    // specular
+    float3 V = normalize(eyePos - input.wpos.xyz);
+    float3 R = reflect(-lightDir, norm);
+    float spec = pow(saturate(dot(V, R)), 32.0);
+    float3 specular = spec * lightColor * diff;
+    
     // result
-    float3 result = (ambient + diffuse) * ObjectColor;
+    float3 result = (ambient + diffuse + specular) * ObjectColor;
     //float3 result = ambient;
 
     return float4(result, 1.0f);
