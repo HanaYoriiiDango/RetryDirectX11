@@ -62,7 +62,7 @@ float4 PS(VS_OUTPUT input) : SV_Target
     float3 V = normalize(eyePos - input.wpos.xyz);
     float3 R = reflect(-lightDir, norm);
     float spec = pow(saturate(dot(V, R)), 32.0);
-    float3 specular = spec * lightColor * diff;
+    float3 specular = spec * lightColor * smoothstep(0.0, 0.1, diff);
     
     // result
     float3 result = (ambient + diffuse + specular) * ObjectColor;
