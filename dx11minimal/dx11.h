@@ -925,8 +925,8 @@ namespace Camera
 		float angle = 90;
 		float a = 3.5;
 
-		XMVECTOR Eye = XMVectorSet(10, 5, 10, 0.0f); // Fixed 
-		//XMVECTOR Eye = XMVectorSet(sin(t)*a, 0, cos(t)*a, 0.0f);
+		//XMVECTOR Eye = XMVectorSet(10, 5, 10, 0.0f); // Fixed 
+		XMVECTOR Eye = XMVectorSet(sin(t)*a, 0, cos(t)*a, 0.0f);
 		XMVECTOR At = XMVectorSet(0, 0, 0, 0.0f);
 		XMVECTOR Up = XMVectorSet(0, 1, 0, 0.0f);
 
