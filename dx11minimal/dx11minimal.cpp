@@ -14,10 +14,9 @@ HWND hWnd;
 HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
-float UP = 0.0f;
-float DOWN = 0.0f;
-float LEFT = 0.0f;
-float RIGHT = 0.0f;
+//float UP_DOWN;
+//float LEFT_RIGHT;
+
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -80,9 +79,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     return (int) msg.wParam;
 }
-
-
-
 //
 //  FUNCTION: MyRegisterClass()
 //
@@ -168,6 +164,26 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+
+    case WM_KEYUP: 
+        {
+
+            case VK_UP: UP_DOWN += 2.1f;
+                break;
+
+            case VK_DOWN: UP_DOWN -= 2.1f;
+                break;
+
+            case VK_LEFT: LEFT_RIGHT += 2.1f;
+                break;
+
+            case VK_RIGHT: LEFT_RIGHT -= 2.1f;
+                break;
+
+        }
+
+        break;
+
     case WM_PAINT:
         {
             PAINTSTRUCT ps;

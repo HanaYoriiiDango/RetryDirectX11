@@ -9,6 +9,13 @@ cbuffer frame : register(b4)
     float4 aspect;
 };
 
+cbuffer drawerP : register(b0)
+{
+    float4 drawConst[32];
+
+
+};
+
 cbuffer camera : register(b3)
 {
     float4x4 world[2];
@@ -42,8 +49,12 @@ float4 PS(VS_OUTPUT input) : SV_Target
 {   
     
     // input
+    
+    float up_down = drawConst[0];
+    float left_right = drawConst[1];
+    
     float ambientStrength = 0.2f;
-    float3 lightPos = float3(5.0f, 6.0f, 1.0f);
+    float3 lightPos = float3(2.0f + left_right, 3.0f + up_down, 1.0f);
 
     float3 lightColor = float3(1.0f, 1.0f, 1.0f);
     float3 ObjectColor = float3(0.7f, 0.4f, 0.2f);

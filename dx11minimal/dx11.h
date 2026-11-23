@@ -16,6 +16,9 @@ using namespace DirectX;
 #define FRAMES_PER_SECOND 60
 #define FRAME_LEN (1000. / (float) FRAMES_PER_SECOND)
 
+float UP_DOWN = 0.0f;
+float LEFT_RIGHT = 0.0f;
+
 typedef unsigned long uint32;
 typedef long int32;
 
@@ -972,8 +975,8 @@ void mainLoop()
 	Draw::NullDrawer(np * np, 1);
 	
 	// sphere
-
-
+	UP_DOWN = 0.0f;
+	LEFT_RIGHT = 0.0f;
 
 	ConstBuf::drawerMat.model = XMMatrixIdentity();
 	ConstBuf::UpdateDrawerMat();
@@ -983,6 +986,8 @@ void mainLoop()
 	int ns = 64;
 
 	ConstBuf::drawerV[0] = ns;
+	ConstBuf::drawerP[0] = UP_DOWN;
+	ConstBuf::drawerP[1] = LEFT_RIGHT;
 	Draw::NullDrawer(ns * ns, 1);
 	Draw::Present();
 }

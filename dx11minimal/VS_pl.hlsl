@@ -68,7 +68,7 @@ VS_OUTPUT VS(uint vID : SV_VertexID)
     uint instanceID = vID / 6;
 
     float row = instanceID % n;
-    float col = instanceID / n;
+    float col = instanceID / n;    
 
     float2 quad[6] = { -1, -1, 1, -1, -1, 1, 1, -1, 1, 1, -1, 1 };
     float2 p = quad[vID % 6];
