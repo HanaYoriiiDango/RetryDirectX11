@@ -14,6 +14,10 @@ HWND hWnd;
 HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
+float UP = 0.0f;
+float DOWN = 0.0f;
+float LEFT = 0.0f;
+float RIGHT = 0.0f;
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);

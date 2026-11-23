@@ -40,10 +40,10 @@ struct VS_OUTPUT
 
 float4 PS(VS_OUTPUT input) : SV_Target
 {   
-
+    
     // input
     float ambientStrength = 0.2f;
-    float3 lightPos = float3(4.0f, 5.0f, 2.0f);
+    float3 lightPos = float3(5.0f, 6.0f, 1.0f);
 
     float3 lightColor = float3(1.0f, 1.0f, 1.0f);
     float3 ObjectColor = float3(0.7f, 0.4f, 0.2f);

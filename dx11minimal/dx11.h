@@ -972,6 +972,9 @@ void mainLoop()
 	Draw::NullDrawer(np * np, 1);
 	
 	// sphere
+
+
+
 	ConstBuf::drawerMat.model = XMMatrixIdentity();
 	ConstBuf::UpdateDrawerMat();
 	Shaders::vShader(1);
